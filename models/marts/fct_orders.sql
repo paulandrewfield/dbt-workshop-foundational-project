@@ -5,9 +5,7 @@
 }}
 
 with orders as (
-    
     select * from {{ ref('stg_orders') }}
-
 ),
 
 line_items as (
