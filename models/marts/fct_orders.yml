@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "order-level fact table with customer attributes and summarized sales, discount, and tax amounts."
+    columns:
+      - name: order_key
+        description: "unique identifier for the order."
+        tests:
+          - not_null
+          - unique
+
+      - name: order_date
+        description: "date the order was placed."
+        tests:
+          - not_null
+
+      - name: customer_key
+        description: "unique identifier for the customer who placed the order."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_key
+
+      - name: status_code
+        description: "order fulfillment status code."
+
+
+      - name: priority_code
+        description: "requested priority level for the order."
+        tests:
+          - not_null
+
+      - name: ship_priority
+        description: "shipping priority for the order."
+        tests:
+          - not_null
+
+      - name: clerk_name
+        description: "name of the clerk who processed the order."
+        tests:
+          - not_null
+
+      - name: name
+        description: "customer name."
+        tests:
+          - not_null
+
+      - name: market_segment
+        description: "customer market segment."
+        tests:
+          - not_null
+
+      - name: gross_item_sales_amount
+        description: "total gross sales amount for items on the order, before discounts and taxes."
+        tests:
+          - not_null
+
+      - name: item_discount_amount
+        description: "total discount amount applied to items on the order."
+        tests:
+          - not_null
+
+      - name: item_tax_amount
+        description: "total tax amount applied to items on the order."
+        tests:
+          - not_null
+
+      - name: net_item_sales_amount
+        description: "total net sales amount for items on the order, after discounts and taxes."
+        tests:
+          - not_null
