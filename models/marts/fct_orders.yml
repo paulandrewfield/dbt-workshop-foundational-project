@@ -25,7 +25,11 @@ models:
                 field: customer_key
 
       - name: status_code
-        description: "order fulfillment status code."
+        description: The current status of the order.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["F","O","P"]
 
 
       - name: priority_code
