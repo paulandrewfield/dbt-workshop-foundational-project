@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "order-level fact table with customer attributes and aggregated sales amounts across all items on the order"
+    columns:
+      - name: order_key
+        description: "unique identifier for an order"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_date
+        description: "date the order was placed"
+        tests:
+          - not_null
+
+      - name: customer_key
+        description: "unique identifier for the customer who placed the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_key
+
+      - name: status_code
+        description: "current status of the order"
+
+      - name: priority_code
+        description: "requested priority level for fulfilling the order"
+
+      - name: ship_priority
+        description: "requested shipping priority for the order"
+
+      - name: clerk_name
+        description: "name of the clerk responsible for the order"
+
+      - name: name
+        description: "customer name associated with the order"
+
+      - name: market_segment
+        description: "customer market segment"
+
+      - name: gross_item_sales_amount
+        description: "gross sales amount for all items on the order"
+        tests:
+          - not_null
+
+      - name: item_discount_amount
+        description: "total discount amount applied to items on the order"
+        tests:
+          - not_null
+
+      - name: item_tax_amount
+        description: "total tax amount applied to items on the order"
+        tests:
+          - not_null
+
+      - name: net_item_sales_amount
+        description: "net sales amount for all items on the order"
+        tests:
+          - not_null
