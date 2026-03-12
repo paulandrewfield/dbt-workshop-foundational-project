@@ -1,0 +1,45 @@
+models:
+- name: fct_orders
+  description: This model consolidates order data, customer information, and line
+    item summaries to provide a comprehensive view of each order. It includes details
+    such as order date, customer information, and financial metrics like gross sales,
+    discounts, taxes, and net sales. This model is useful for analyzing sales performance
+    and customer behavior.
+  columns:
+  - name: order_key
+    description: A unique identifier for each order.
+    data_tests:
+      - unique
+      - not_null
+  - name: order_date
+    description: The date when the order was placed.
+    data_tests:
+      - not_null
+  - name: customer_key
+    description: A unique identifier for each customer.
+    data_tests:
+      - not_null
+      - relationships:
+          to: ref('stg_customers')
+          field: customer_key
+  - name: status_code
+    description: The current status of the order.
+  - name: priority_code
+    description: The priority level assigned to the order.
+  - name: ship_priority
+    description: The shipping priority of the order.
+  - name: clerk_name
+    description: The name of the clerk who processed the order.
+  - name: name
+    description: The name of the customer.
+  - name: market_segment
+    description: The market segment to which the customer belongs.
+  - name: gross_item_sales_amount
+    description: The total gross sales amount for the items in the order.
+  - name: item_discount_amount
+    description: The total discount amount applied to the items in the order.
+  - name: item_tax_amount
+    description: The total tax amount applied to the items in the order.
+  - name: net_item_sales_amount
+    description: The total net sales amount for the items in the order after discounts
+      and taxes.
